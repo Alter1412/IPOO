@@ -82,7 +82,7 @@ function agregarPasajeros(){
     $un_pasajero["nombre"]=$nombre;
     $un_pasajero["apellido"]=$apellido;
     $un_pasajero["dni"]=$dni;
-    print_r($un_pasajero);
+    //print_r($un_pasajero);
     return $un_pasajero;
 }
 /**
@@ -164,7 +164,7 @@ function codigoModificacionPasajero($v){
                 //print_r($pasajeros);
                 $num=trim(fgets(STDIN));
                 unset($pasajeros[$num]);
-                print_r($pasajeros);
+                //print_r($pasajeros);
                 $v->setPasajeros($pasajeros);
                 echo "Pasajero Eliminado\n";
                 break;
