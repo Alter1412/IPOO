@@ -127,9 +127,10 @@ function modificarUnPasajero($travel){
                 break;
             
         }
-        echo "Desea modificar otro dato (s/n)?\n";
-        $respuesta=trim(fgets(STDIN));
-    }while($s!=4 && $respuesta!="n");
+        //echo "Desea modificar otro dato (s/n)?\n";
+       // menuModificarPasajeros();
+        //$s=trim(fgets(STDIN));
+    }while($s!=4 /*&& $respuesta!="n"*/);
     return $t;
 }
 /**
@@ -170,9 +171,9 @@ function codigoModificacionPasajero($v){
                 break;
                 
         }
-        echo "Desea modificar otro pasajero (s/n)?\n";
-        $res=trim(fgets(STDIN));
-    }while($selc!=4 && $res!="n");
+       
+        
+    }while($selc!=4 /*&& $res!="n"*/);
 }
 /**
  * funcion que guarda el codigo de la opcion dos
@@ -198,9 +199,10 @@ function codigoOpcion2($elViaje){
                 
 
         }
-        echo "Desea modifcar algo mas? (s/n)\n";
-        $r=trim(fgets(STDIN));
-    }while($o!=4 && $r!="n");
+        //echo "Desea modifcar algo mas? (s/n)\n";
+        //menuSubopcionesOpcion2();
+        //$o=trim(fgets(STDIN));
+    }while($o!=4 /*&& $r!="n"*/);
 }
 
 //CODIGO PRINCIPAL
@@ -252,7 +254,7 @@ do{
                         }
                         */
                         $pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
-                        if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar o agregar pasajero  
+                        if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar pasajero. Tendra algo que ver con el unset? 
                             $listaPasajeros[$pAcutales]=agregarPasajeros();
                             $viaje->setPasajeros($listaPasajeros);
                             //$contador=$contador+1;
