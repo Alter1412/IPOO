@@ -23,7 +23,7 @@ function menuOpcion1(){
     echo "+-------------------------------+\n";
     echo "+ 1- Datos  del viaje           +\n";
     echo "+ 2- Pasajeros                  +\n";
-    echo "+ 3- Cancelar                   +\n";
+    echo "+ 3- Atras                      +\n";
     echo "+-------------------------------+\n";
 }
 
@@ -54,7 +54,7 @@ function menuModificarPasajeros(){
     echo "+ 1- Nombre           +\n";
     echo "+ 2- Apellido         +\n";
     echo "+ 3- DNI              +\n";
-    echo "+ 4- Cancelar         +\n";
+    echo "+ 4- Atras            +\n";
     echo "+---------------------+\n";
 }
 //Guarda codigo de la opcion 1
@@ -145,10 +145,10 @@ function codigoModificacionPasajero($v){
         $selc=trim(fgets(STDIN));
         switch($selc){
             case 1:
-                print_r($pasajeros);
+                //print_r($pasajeros);
                 if($cantPasajerosActual<$cantPasMax){
                     $pasajeros[$cantPasajerosActual]=agregarPasajeros();
-                    print_r($pasajeros);
+                    //print_r($pasajeros);
                     $v->setPasajeros($pasajeros);
                     echo "Pasajero agregado\n";
                     
@@ -161,7 +161,7 @@ function codigoModificacionPasajero($v){
                 break;
             case 3:
                 echo "Ingrese el N° de pasajero a eliminar:\n";
-                print_r($pasajeros);
+                //print_r($pasajeros);
                 $num=trim(fgets(STDIN));
                 unset($pasajeros[$num]);
                 print_r($pasajeros);
@@ -227,7 +227,7 @@ $un_pasajero=["dni"];
 /*$listaPasajeros=$viaje->getPasajeros();
 $listaPasajeros[0]=$un_pasajero;
 $viaje->setPasajeros($listaPasajeros);*/
-$contador=0;
+//$contador=0;
 
 do{
     menuPrincipal();
@@ -253,7 +253,7 @@ do{
                         */
                         $pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
                         if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar o agregar pasajero  
-                            $listaPasajeros[$contador]=agregarPasajeros();
+                            $listaPasajeros[$pAcutales]=agregarPasajeros();
                             $viaje->setPasajeros($listaPasajeros);
                             //$contador=$contador+1;
                         }else{
