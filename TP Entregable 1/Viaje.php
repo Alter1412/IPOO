@@ -67,10 +67,12 @@ class Viaje{
         $listap="\n";
         $stop=$this->getCantidadPasajerosMaxima();
         for ($i=0;$i<$stop;$i++){
-            $listap=$listap."   Nombre: ".$arrayPasajeros[$i]["nombre"].
-            "\n Apellido: ".$arrayPasajeros[$i]["apellido"].
-            "\n DNI: ".$arrayPasajeros[$i]["dni"]."\n
-            ------------------\n";
+            $nump=$i;
+            $nump=$nump+1;
+            $listap=$listap."---------------\nN° de Pasajero: ".$nump.
+            "\nNombre: ".$arrayPasajeros[$i]["nombre"].
+            "\nApellido: ".$arrayPasajeros[$i]["apellido"].
+            "\nDNI: ".$arrayPasajeros[$i]["dni"]."\n------------------\n";
         }
         return $listap;
     }

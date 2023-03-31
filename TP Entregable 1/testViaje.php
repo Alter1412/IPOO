@@ -297,17 +297,20 @@ do{
                             $listaPasajeros[$i]=agregarPasajeros();
                         }
                         */
-                        $listaPasajeros=$viaje->getPasajeros();
-                        //---------------
-                        $llenarLugarPasajero=elementoVacio($listaPasajeros, $viaje->getCantidadPasajerosMaxima());
-                        if($llenarLugarPasajero!=-1 && $llenarLugarPasajero<$viaje->getCantidadPasajerosMaxima()){
-                            $listaPasajeros[$llenarLugarPasajero]=agregarPasajeros();
-                            $viaje->setPasajeros($listaPasajeros);
+                        if($viaje==null){
+                            echo "Carge un Viaje\n";
                         }else{
-                            echo "Lista llena.\n";
+                            $listaPasajeros=$viaje->getPasajeros();
+                        //---------------
+                            $llenarLugarPasajero=elementoVacio($listaPasajeros, $viaje->getCantidadPasajerosMaxima());
+                            if($llenarLugarPasajero!=-1 && $llenarLugarPasajero<$viaje->getCantidadPasajerosMaxima()){
+                                $listaPasajeros[$llenarLugarPasajero]=agregarPasajeros();
+                                $viaje->setPasajeros($listaPasajeros);
+                            }else{
+                                echo "Lista llena.\n";
                         }
                         //------------------------
-                        
+                        }
                         /*$pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
                         if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar pasajero. Tendra algo que ver con el unset? 
                                 
@@ -325,10 +328,18 @@ do{
             
             break;
         case 2:
-            codigoOpcion2($viaje);
+            if($viaje==null){
+                echo "Carge un Viaje\n";
+            }else{
+                codigoOpcion2($viaje);
+            }
             break;
         case 3:
-            echo $viaje->__toString();
+            if($viaje==null){
+                echo "Carge un Viaje\n";
+            }else{
+                echo $viaje->__toString();
+            }
             
         }
 }while($opcion!=4);
