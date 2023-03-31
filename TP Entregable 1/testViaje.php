@@ -7,7 +7,7 @@ include 'Viaje.php';
         Se deben cargar los datos del viaje primero por el menu. Salta error si se quiere 
        agregar a los pasajeros primero. Despues de agregar un viaje se pueden agregar los 
        pasajeros
-        
+        Al agregar
 
        */
 
@@ -262,7 +262,7 @@ do{
                 switch($s){
                     case 1:
                         $viaje=codigoOpcion1();
-                        $listaPasajeros=$viaje->getPasajeros();
+                        
                         break;
                     case 2:
                         /*echo "Cuantos pasajeros desea agregar?\n";//agregar algun contador que cuente hasta la capacidad maxima de pasajeros?
@@ -273,19 +273,15 @@ do{
                             $listaPasajeros[$i]=agregarPasajeros();
                         }
                         */
-                        
+                        $listaPasajeros=$viaje->getPasajeros();
                         $pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
                         if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar pasajero. Tendra algo que ver con el unset? 
                                 
-                                if(empty($listaPasajeros[$contador])){
-                                    $listaPasajeros[$contador]=agregarPasajeros();
-                                    $viaje->setPasajeros($listaPasajeros);
-                                    $contador=$contador+1;
-                                }
+                              echo "Pasajeros Actuales: ".$pAcutales."\n";  
                                 
                             
-                            //$listaPasajeros[$pAcutales]=agregarPasajeros();
-                            //$viaje->setPasajeros($listaPasajeros);
+                            $listaPasajeros[$pAcutales]=agregarPasajeros();
+                            $viaje->setPasajeros($listaPasajeros);
                             //$contador=$contador+1;
                         }else{
                             echo "Lista llena.\n";
