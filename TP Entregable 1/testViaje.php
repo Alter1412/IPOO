@@ -1,15 +1,6 @@
 <?php
 include 'Viaje.php';
-/*Notas:
-        Si se elimina el elemento 0 o algun elemento entre medio del array pasajeros 
-       con n cantidad de pasajeros guardados,solo se puede agregar ese pasajero a 
-       travez de la opcion modificar un pasajero.
-        Se deben cargar los datos del viaje primero por el menu. Salta error si se quiere 
-       agregar a los pasajeros primero. Despues de agregar un viaje se pueden agregar los 
-       pasajeros
-        Al agregar
 
-       */
 
 
 /**
@@ -160,8 +151,19 @@ function codigoModificacionPasajero($v){
         switch($selc){
             
             case 1:
+                $pasajeros=$v->getPasajeros();
+                        //---------------
+                        $llenarLugar=elementoVacio($pasajeros, $v->getCantidadPasajerosMaxima());
+                        if($llenarLugar!=-1 && $llenarLugar<$v->getCantidadPasajerosMaxima()){
+                            $pasajeros[$llenarLugar]=agregarPasajeros();
+                            $v->setPasajeros($pasajeros);
+                            echo "Pasajero agregado\n";
+                        }else{
+                            echo "Lista llena.\n";
+                            echo "Cantidad de pasajeros maxima alcansada\n";
+                        }
                 //print_r($pasajeros);
-                if($cantPasajerosActual<$cantPasMax){
+                /*if($cantPasajerosActual<$cantPasMax){
                     $pasajeros[$cantPasajerosActual]=agregarPasajeros();
                     //print_r($pasajeros);
                     $v->setPasajeros($pasajeros);
@@ -170,7 +172,7 @@ function codigoModificacionPasajero($v){
                     
                 }else{
                     echo "Cantidad de pasajeros maxima alcansada\n";
-                }
+                }*/
                 break;
             case 2:
                 $v->setPasajeros(modificarUnPasajero($pasajeros));
@@ -220,6 +222,28 @@ function codigoOpcion2($elViaje){
     }while($o!=4 /*&& $r!="n"*/);
 }
 
+/**
+ * Funcion que retorna la posicion del primer elemento vacio que encuentra del array
+ * @param array $arrayPasajeros
+ * @return int
+ */
+function elementoVacio($arrayPasajeros,$maxPasajeros){
+    $i=0;
+    $stop=$maxPasajeros;
+    $encontrado=false;
+    while($i<$stop && $encontrado==false){
+        if(empty($arrayPasajeros[$i])){
+            $posicion=$i;
+            $i=$i+1;
+            $encontrado=true;
+        }else{
+            $posicion=-1;
+            $i=$i+1;
+        }
+
+    }
+    return $posicion;
+}
 //CODIGO PRINCIPAL
 /**Cuando se lanza el programa por primera vez hay que
  * Cargar primero los datos del viaje  
@@ -274,7 +298,17 @@ do{
                         }
                         */
                         $listaPasajeros=$viaje->getPasajeros();
-                        $pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
+                        //---------------
+                        $llenarLugarPasajero=elementoVacio($listaPasajeros, $viaje->getCantidadPasajerosMaxima());
+                        if($llenarLugarPasajero!=-1 && $llenarLugarPasajero<$viaje->getCantidadPasajerosMaxima()){
+                            $listaPasajeros[$llenarLugarPasajero]=agregarPasajeros();
+                            $viaje->setPasajeros($listaPasajeros);
+                        }else{
+                            echo "Lista llena.\n";
+                        }
+                        //------------------------
+                        
+                        /*$pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
                         if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar pasajero. Tendra algo que ver con el unset? 
                                 
                               echo "Pasajeros Actuales: ".$pAcutales."\n";  
@@ -285,7 +319,7 @@ do{
                             //$contador=$contador+1;
                         }else{
                             echo "Lista llena.\n";
-                        }
+                        }*/
                 }
             }while($s!=3);
             
