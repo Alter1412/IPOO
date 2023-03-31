@@ -5,8 +5,10 @@ include 'Viaje.php';
        con n cantidad de pasajeros guardados,solo se puede agregar ese pasajero a 
        travez de la opcion modificar un pasajero.
         Se deben cargar los datos del viaje primero por el menu. Salta error si se quiere 
-       agregar a los pasajeros primero.
+       agregar a los pasajeros primero. Despues de agregar un viaje se pueden agregar los 
+       pasajeros
         
+
        */
 
 
