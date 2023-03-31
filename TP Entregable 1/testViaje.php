@@ -175,9 +175,11 @@ function codigoModificacionPasajero($v){
                 }*/
                 break;
             case 2:
+                echo $v->__toString();
                 $v->setPasajeros(modificarUnPasajero($pasajeros));
                 break;
             case 3:
+                echo $v->__toString();
                 echo "Ingrese el N° de pasajero a eliminar:\n";
                 //print_r($pasajeros);
                 $num=trim(fgets(STDIN));
