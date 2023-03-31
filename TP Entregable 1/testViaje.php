@@ -1,4 +1,5 @@
 <?php
+//llamo al arvhivo de la clase Viaje
 include 'Viaje.php';
 
 
@@ -37,7 +38,7 @@ function menuSubopcionesOpcion2(){
     echo "+------------------------------------+\n";
     echo "+ 1- Codigo del viaje                +\n";
     echo "+ 2- Destino                         +\n";
-    //echo "+ 3- Cantidad maxima de pasajeros    +\n";
+    
     echo "+ 3- Datos del los pasajeros         +\n";
     echo "+ 4- Volver atras                    +\n";
     echo "+------------------------------------+\n";
@@ -58,7 +59,7 @@ function menuModificarPasajeros(){
     echo "+ 4- Atras            +\n";
     echo "+---------------------+\n";
 }
-//Guarda codigo de la opcion 1
+//Guarda codigo de la opcion 1 y crea un objeto Viaje
 function codigoOpcion1(){
     echo "Ingrese el codigo de Viaje:\n";
     $codigo=trim(fgets(STDIN));
@@ -83,7 +84,7 @@ function agregarPasajeros(){
     $un_pasajero["nombre"]=$nombre;
     $un_pasajero["apellido"]=$apellido;
     $un_pasajero["dni"]=$dni;
-    //print_r($un_pasajero);
+    
     return $un_pasajero;
 }
 /**
@@ -108,7 +109,7 @@ function modificarUnPasajero($travel){
     $nump=trim(fgets(STDIN));
     
     do{
-        //print_r($t);
+        
         
         menuModificarPasajeros();
         $s=trim(fgets(STDIN));
@@ -128,14 +129,13 @@ function modificarUnPasajero($travel){
                 break;
             
         }
-        //echo "Desea modificar otro dato (s/n)?\n";
-       // menuModificarPasajeros();
-        //$s=trim(fgets(STDIN));
-    }while($s!=4 /*&& $respuesta!="n"*/);
+       
+    }while($s!=4 );
     return $t;
 }
 /**
  * funcion que guarda el codigo para modificar a los pasajeros
+ * @param Viaje $v
  */
 function codigoModificacionPasajero($v){
 
@@ -147,7 +147,7 @@ function codigoModificacionPasajero($v){
     do{
         menuPasajeros();
         $selc=trim(fgets(STDIN));
-        //echo "cant pasajeros actual: ".$cantPasajerosActual."\n";
+        
         switch($selc){
             
             case 1:
@@ -162,17 +162,8 @@ function codigoModificacionPasajero($v){
                             echo "Lista llena.\n";
                             echo "Cantidad de pasajeros maxima alcansada\n";
                         }
-                //print_r($pasajeros);
-                /*if($cantPasajerosActual<$cantPasMax){
-                    $pasajeros[$cantPasajerosActual]=agregarPasajeros();
-                    //print_r($pasajeros);
-                    $v->setPasajeros($pasajeros);
-                    $cantPasajerosActual=count($pasajeros);
-                    echo "Pasajero agregado\n";
-                    
-                }else{
-                    echo "Cantidad de pasajeros maxima alcansada\n";
-                }*/
+                
+                  
                 break;
             case 2:
                 echo $v->__toString();
@@ -181,10 +172,10 @@ function codigoModificacionPasajero($v){
             case 3:
                 echo $v->__toString();
                 echo "Ingrese el N° de pasajero a eliminar:\n";
-                //print_r($pasajeros);
+                
                 $num=trim(fgets(STDIN));
                 unset($pasajeros[$num-1]);
-                //print_r($pasajeros);
+                
                 $v->setPasajeros($pasajeros);
                 echo "Pasajero Eliminado\n";
                 break;
@@ -192,10 +183,11 @@ function codigoModificacionPasajero($v){
         }
        
         
-    }while($selc!=4 /*&& $res!="n"*/);
+    }while($selc!=4 );
 }
 /**
  * funcion que guarda el codigo de la opcion dos
+ * @param Viaje $elViaje
  */
 function codigoOpcion2($elViaje){
     do{
@@ -218,10 +210,8 @@ function codigoOpcion2($elViaje){
                 
 
         }
-        //echo "Desea modifcar algo mas? (s/n)\n";
-        //menuSubopcionesOpcion2();
-        //$o=trim(fgets(STDIN));
-    }while($o!=4 /*&& $r!="n"*/);
+        
+    }while($o!=4 );
 }
 
 /**
@@ -247,32 +237,24 @@ function elementoVacio($arrayPasajeros,$maxPasajeros){
     return $posicion;
 }
 //CODIGO PRINCIPAL
-/**Cuando se lanza el programa por primera vez hay que
- * Cargar primero los datos del viaje  
- */
+
 echo "--------------------------------------\n";
 echo "+     Bienvenido a Viaje Feliz       +\n";
 echo "--------------------------------------\n";
 echo "+ Que desea realizar?:               +\n";
 echo "--------------------------------------\n";
-//$viaje= new Viaje(0000,"paris",1);
-//$listaPasajeros=[];
 
-//$listaPasajeros[0]["nombre"]="alter";
-//$listaPasajeros[0]["apellido"]="lillo";
-//$listaPasajeros[0]["dni"]=11612294;
-//$listaPasajeros[1]=$un_pasajero;
+
+
 $un_pasajero=[];
 $un_pasajero=["nombre"];
-//$un_pasajero["nombre"]="alter";
-$un_pasajero=["apellido"];
-//$un_pasajero["apellido"]="lillo";
-$un_pasajero=["dni"];
-//$un_pasajero["dni"]=11612294;
 
-/*$listaPasajeros=$viaje->getPasajeros();
-$listaPasajeros[0]=$un_pasajero;
-$viaje->setPasajeros($listaPasajeros);*/
+$un_pasajero=["apellido"];
+
+$un_pasajero=["dni"];
+
+
+
 $contador=0;
 $vacio=[];
 $estaVacio=false;
@@ -291,19 +273,12 @@ do{
                         
                         break;
                     case 2:
-                        /*echo "Cuantos pasajeros desea agregar?\n";//agregar algun contador que cuente hasta la capacidad maxima de pasajeros?
-                        $stop=trim(fgets(STDIN));
-                        //$viaje->getCantidadPasajerosMaxima();
-                        $listaPasajeros=$viaje->getPasajeros();
-                        for($i=0;$i<$stop;$i++){
-                            $listaPasajeros[$i]=agregarPasajeros();
-                        }
-                        */
+                        
                         if($viaje==null){
                             echo "Carge un Viaje\n";
                         }else{
                             $listaPasajeros=$viaje->getPasajeros();
-                        //---------------
+                        
                             $llenarLugarPasajero=elementoVacio($listaPasajeros, $viaje->getCantidadPasajerosMaxima());
                             if($llenarLugarPasajero!=-1 && $llenarLugarPasajero<$viaje->getCantidadPasajerosMaxima()){
                                 $listaPasajeros[$llenarLugarPasajero]=agregarPasajeros();
@@ -311,20 +286,9 @@ do{
                             }else{
                                 echo "Lista llena.\n";
                         }
-                        //------------------------
+                       
                         }
-                        /*$pAcutales=count($listaPasajeros);//no se puede cargar otro pasajero cuando uno de los pasajeros es eliminado.
-                        if($pAcutales < $viaje->getCantidadPasajerosMaxima()){//solo se puede modificar a travez de la opcion modifcar pasajero. Tendra algo que ver con el unset? 
-                                
-                              echo "Pasajeros Actuales: ".$pAcutales."\n";  
-                                
-                            
-                            $listaPasajeros[$pAcutales]=agregarPasajeros();
-                            $viaje->setPasajeros($listaPasajeros);
-                            //$contador=$contador+1;
-                        }else{
-                            echo "Lista llena.\n";
-                        }*/
+                      
                 }
             }while($s!=3);
             
