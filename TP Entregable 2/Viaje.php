@@ -3,15 +3,17 @@ class Viaje{
     private $codigo_vaje;
     private $destino_viaje;
     private $cant_max_pasajeros;
-    private $pasajeros;
+    private $pasajeros;// ahora son objetos Pasajeros
+    private $responsableViaje;
     
     /**
      * Metodo construct del objeto Viaje
      */
-    public function __construct($codigoViaje,$destino,$cantMaxPasajeros){
+    public function __construct($codigoViaje,$destino,$cantMaxPasajeros,$responsableViaje){
         $this->codigo_vaje=$codigoViaje;
         $this->destino_viaje=$destino;
         $this->cant_max_pasajeros=$cantMaxPasajeros;
+        $this->responsableViaje->$responsableViaje;
         $this->pasajeros=[];
         
         
@@ -40,11 +42,17 @@ class Viaje{
         $this->cant_max_pasajeros=$cantMaxPasajeros;
     }
     /**
-     * metodo set que asigna un arrglo de pasajeros a la variable $pasajeros
+     * metodo set que asigna un arreglo de la clase pasajeros a la variable $pasajeros
      * del objeto Viaje
      */
     public function setPasajeros($listaPasajeros){
         $this->pasajeros=$listaPasajeros;
+    }
+    /**
+     * Metodo que asigna un objeto responsable a la variable $responableViaje
+     */
+    public function setResponsableViaje($responableViaje){
+        $this->responsableViaje=$responableViaje;
     }
   
     //metodos get
@@ -67,9 +75,15 @@ class Viaje{
     public function getCantidadPasajerosMaxima(){
         return $this->cant_max_pasajeros;
     }
-    //metodo que retorna un arreglo de pasajeros
+    //metodo que retorna un arreglo de la clase pasajeros
     public function getPasajeros(){
         return $this->pasajeros;
+    }
+    /**
+     * Metodo que retorna un objeto responable
+     */
+    public function getResponsableViaje(){
+        return $this->responsableViaje;
     }
     /**
      * metodo que retorna una variable que contiene una cadena de string
@@ -81,10 +95,11 @@ class Viaje{
         for ($i=0;$i<$stop;$i++){
             $nump=$i;
             $nump=$nump+1;
-            $listap=$listap."---------------\nN° de Pasajero: ".$nump.
-            "\nNombre: ".$arrayPasajeros[$i]["nombre"].
-            "\nApellido: ".$arrayPasajeros[$i]["apellido"].
-            "\nDNI: ".$arrayPasajeros[$i]["dni"]."\n------------------\n";
+            $listap=$listap.
+            "---------------
+            \nN° de Pasajero: ".$nump.
+            $arrayPasajeros[$i]->__toString().
+            "\n------------------\n";
         }
         return $listap;
     }
@@ -97,7 +112,8 @@ class Viaje{
         return "Codigo de viaje: ".$this->getCodigo_viaje().
         "\nDestino: ".$this->getDestino_viaje().
         "\nCantidad Maxima de Pasajeros: ".$this->getCantidadPasajerosMaxima().
-        "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros()."\n";
+        "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros().
+        "\nResponsable del viaje: ".$this->getResponsableViaje();
     }
 }
 ?>
