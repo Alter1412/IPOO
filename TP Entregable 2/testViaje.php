@@ -1,6 +1,8 @@
 <?php
 //llamo al arvhivo de la clase Viaje
-include 'Viaje.php';
+include_once 'Viaje.php';
+include_once 'Pasajeros.php';
+include_once 'ResponsableV.php';
 
 
 
@@ -38,9 +40,9 @@ function menuSubopcionesOpcion2(){
     echo "+------------------------------------+\n";
     echo "+ 1- Codigo del viaje                +\n";
     echo "+ 2- Destino                         +\n";
-    
     echo "+ 3- Datos del los pasajeros         +\n";
-    echo "+ 4- Volver atras                    +\n";
+    echo "+ 4- Datos del Responsable del viaje +\n";
+    echo "+ 5- Volver atras                    +\n";
     echo "+------------------------------------+\n";
 
 }
@@ -56,7 +58,8 @@ function menuModificarPasajeros(){
     echo "+ 1- Nombre           +\n";
     echo "+ 2- Apellido         +\n";
     echo "+ 3- DNI              +\n";
-    echo "+ 4- Atras            +\n";
+    echo "+ 4- Telefono         +\n";
+    echo "+ 5- Atras            +\n";
     echo "+---------------------+\n";
 }
 //Guarda codigo de la opcion 1 y crea un objeto Viaje
@@ -80,10 +83,10 @@ function agregarPasajeros(){
     $apellido=trim(fgets(STDIN));
     echo "Ingrese el dni del pasajero\n";
     $dni=trim(fgets(STDIN));
-    $un_pasajero=[];
-    $un_pasajero["nombre"]=$nombre;
-    $un_pasajero["apellido"]=$apellido;
-    $un_pasajero["dni"]=$dni;
+    echo "Ingrese el numero de Telefono:\n";
+    $telefono=trim(fgets(STDIN));
+    $un_pasajero= new Pasajeros($nombre,$apellido,$dni,$telefono);
+    
     
     return $un_pasajero;
 }
@@ -101,10 +104,13 @@ function menuPasajeros(){
     echo "+-------------------------+\n";
 }
 /**
- * funcion que modifica un pasajero y retorna un array
+ * funcion que modifica que recibe un array de pasajeros, pide un el numero de pasajero
+ * a modificar, modifica dicho pasajero y lo retorna
+ * @param Pasajeros $pasajeros
+ * @return Pasajeros
  */
-function modificarUnPasajero($travel){
-    $t=$travel;
+function modificarUnPasajero($pasajeros){
+    $t=$pasajeros;//t recibe el array de objetos pasajeros
     echo "Ingrese el N° de pasajero: \n";
     $nump=trim(fgets(STDIN));
     
@@ -117,20 +123,26 @@ function modificarUnPasajero($travel){
             case 1:
                 echo "Ingrese el nuevo nombre: \n";
                 $nuevoNombre=trim(fgets(STDIN));
-                $t[$nump-1]["nombre"]=$nuevoNombre;
+                $t[$nump-1]->setNombre($nuevoNombre);
                 break;
             case 2:
                 echo "Ingrese el nuevo apellido: \n";
-                $t[$nump-1]["apellido"]=trim(fgets(STDIN));
+                $nuevoApellido=trim(fgets(STDIN));
+                $t[$nump-1]->setNombre($nuevoApellido);
                 break;
             case 3:
                 echo "Ingrese el nuevo DNI:\n";
-                $t[$nump-1]["dni"]=trim(fgets(STDIN));
+                $nuevoDni=trim(fgets(STDIN));
+                $t[$nump-1]->setNumeroDocumento($nuevoDni);
                 break;
+            case 4:
+                echo "Ingrese el nuevo telefono:\n";
+                $nuevoTelefono=trim(fgets(STDIN));
+                $t[$nump-1]->setTelefono($nuevoTelefono);
             
         }
        
-    }while($s!=4 );
+    }while($s!=5 );
     return $t;
 }
 /**
@@ -185,6 +197,58 @@ function codigoModificacionPasajero($v){
         
     }while($selc!=4 );
 }
+
+function menuModificarResponsable(){
+    echo "+---------------------+\n";
+    echo "+ Que desea modifcar? +\n";
+    echo "+---------------------+\n";
+    echo "+ 1- N° de Empleado   +\n";
+    echo "+ 2- N° de Licencia   +\n";
+    echo "+ 3- Nombre           +\n";
+    echo "+ 4- Apellido         +\n";
+    echo "+ 5- Atras            +\n";
+    echo "+---------------------+\n";
+}
+
+/**
+ * Funcion que modifica al responsable del viaje
+ * @param Viaje $viaje
+ * @return ResponsableV
+ */
+function modificarResponsableViaje($viaje){
+   
+    do{
+        $responsable=$viaje->getResponsableViaje();
+        menuModificarResponsable();
+        $respuesta=trim(fgets(STDIN));
+        switch($respuesta){
+            case 1:
+                echo "Ingrese el Nuevo N°:\n";
+                $nuevoNumEmpleado=trim(fgets(STDIN));
+                $responsable->setNumeroEmpleado($nuevoNumEmpleado);
+                break;
+            case 2: 
+                echo "Ingrese el nuevo N° de Licencia:\n";
+                $nuevoNumLincencia=trim(fgets(STDIN));
+                $responsable->setNumeroLicencia($nuevoNumLincencia);
+                break;
+            case 3:
+                echo "Ingrese el Nuevo Nombre:\n";
+                $nuevoNombre=trim(fgets(STDIN));
+                $responsable->setNombre($nuevoNombre);
+                break;
+            case 4:
+                echo "Ingrese el Nuevo Apellido:\n";
+                $nuevoApellido=trim(fgets(STDIN));
+                $responsable->setApellido($nuevoApellido);
+                break;
+        }
+    
+    }while($respuesta!=5);
+    return $responsable;
+
+
+}
 /**
  * funcion que guarda el codigo de la opcion dos
  * @param Viaje $elViaje
@@ -207,11 +271,14 @@ function codigoOpcion2($elViaje){
             case 3:
                 codigoModificacionPasajero($elViaje);
                 break;
+            case 4://modificar responsable
+                $elViaje->setResponsableViaje($elViaje);
+
                 
 
         }
         
-    }while($o!=4 );
+    }while($o!=5 );
 }
 
 /**
