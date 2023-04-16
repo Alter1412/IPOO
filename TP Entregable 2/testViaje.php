@@ -87,6 +87,7 @@ function codigoOpcion1(){
     $destino=trim(fgets(STDIN));
     echo "Ingrese la cantidad maxima de pasajeros:\n";
     $cmp=trim(fgets(STDIN));
+    echo "Ingrese al responsable del viaje:\n";
     $responsableViaje=cargarResponsable();
     $unViaje= new Viaje($codigo,$destino,$cmp,$responsableViaje);
     return $unViaje;
@@ -185,11 +186,12 @@ function codigoModificacionPasajero($v){
                         //---------------
                         $llenarLugar=elementoVacio($pasajeros, $v->getCantidadPasajerosMaxima());
                         if($llenarLugar!=-1 && $llenarLugar<$v->getCantidadPasajerosMaxima()){
-                            $pasajeros[$llenarLugar]=agregarPasajeros();
-                            $estaRepetido=pasajerosIguales($pasajeros,$pasajeros[$llenarLugar]);
+                            $pasajero_a_agregar=agregarPasajeros();
+                            $estaRepetido=pasajerosIguales($pasajeros,$pasajero_a_agregar);
                                 if($estaRepetido){
                                     echo "El pasajero ya se encuentra en la lista.\n";
                                 }else{
+                                    $pasajeros[$llenarLugar]=$pasajero_a_agregar;
                                     $v->setPasajeros($pasajeros);
                                     echo "Pasajero agregado\n";
 
@@ -388,12 +390,14 @@ do{
                         
                             $llenarLugarPasajero=elementoVacio($listaPasajeros, $viaje->getCantidadPasajerosMaxima());
                             if($llenarLugarPasajero!=-1 && $llenarLugarPasajero<$viaje->getCantidadPasajerosMaxima()){
-                                $listaPasajeros[$llenarLugarPasajero]=agregarPasajeros();
-                                $estaRepetido=pasajerosIguales($listaPasajeros,$listaPasajeros[$llenarLugarPasajero]);
-                                if($estaRepetido){
+                                $pasajero_a_agregar=agregarPasajeros();
+                                $estaRepetido=pasajerosIguales($listaPasajeros,$pasajero_a_agregar);
+                                if($estaRepetido==true){
                                     echo "El pasajero ya se encuentra en la lista.\n";
+                                    
                                 }else{
-                                $viaje->setPasajeros($listaPasajeros);
+                                    $listaPasajeros[$llenarLugarPasajero]=$pasajero_a_agregar;
+                                    $viaje->setPasajeros($listaPasajeros);
                                 }
                             }else{
                                 echo "Lista llena.\n";

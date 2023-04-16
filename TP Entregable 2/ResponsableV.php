@@ -54,7 +54,7 @@ class ResponsableV{
     {
         return 
         "Numero de Empleado: ".$this->getNumeroEmpleado().
-        "\nNUmero de Licencia: ".$this->getNumeroLicencia().
+        "\nNumero de Licencia: ".$this->getNumeroLicencia().
         "\nNombre: ".$this->getNombre().
         "\nApelido: ".$this->getApellido();
     }

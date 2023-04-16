@@ -95,11 +95,13 @@ class Viaje{
         for ($i=0;$i<$stop;$i++){
             $nump=$i;
             $nump=$nump+1;
+            if($arrayPasajeros[$i]!=null){
             $listap=$listap.
             "---------------
             \nN° de Pasajero: ".$nump.
-            $arrayPasajeros[$i]->__toString().
+            "\n".$arrayPasajeros[$i]->__toString().
             "\n------------------\n";
+            }
         }
         return $listap;
     }
@@ -112,7 +114,7 @@ class Viaje{
         return "Codigo de viaje: ".$this->getCodigo_viaje().
         "\nDestino: ".$this->getDestino_viaje().
         "\nCantidad Maxima de Pasajeros: ".$this->getCantidadPasajerosMaxima().
-        "\nResponsable del viaje:\n ".$this->getResponsableViaje().
+        "\nResponsable del viaje: \n".$this->getResponsableViaje().
         "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros();
         
     }
