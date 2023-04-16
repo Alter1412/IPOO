@@ -359,12 +359,6 @@ echo "--------------------------------------\n";
 
 
 
-$un_pasajero=[];
-$un_pasajero=["nombre"];
-
-$un_pasajero=["apellido"];
-
-$un_pasajero=["dni"];
 
 
 
