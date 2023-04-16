@@ -62,6 +62,23 @@ function menuModificarPasajeros(){
     echo "+ 5- Atras            +\n";
     echo "+---------------------+\n";
 }
+/**
+ * funcion que carga un responsable del viaje
+ */
+function cargarResponsable(){
+    echo "Ingrese N° de empleado: \n";
+    $numEmpleado=trim(fgets(STDIN));
+    echo "Ingrese el N° de licencia:\n";
+    $numLicencia=trim(fgets(STDIN));
+    echo "Ingrese el Nombre:\n";
+    $nombre=trim(fgets(STDIN));
+    echo "Ingrese el Apellido:\n";
+    $apellido=trim(fgets(STDIN));
+    $responsable_viaje= new ResponsableV($numEmpleado,$numLicencia,$nombre,$apellido);
+    
+    
+    return $responsable_viaje;
+}
 //Guarda codigo de la opcion 1 y crea un objeto Viaje
 function codigoOpcion1(){
     echo "Ingrese el codigo de Viaje:\n";
@@ -70,7 +87,8 @@ function codigoOpcion1(){
     $destino=trim(fgets(STDIN));
     echo "Ingrese la cantidad maxima de pasajeros:\n";
     $cmp=trim(fgets(STDIN));
-    $unViaje= new Viaje($codigo,$destino,$cmp);
+    $responsableViaje=cargarResponsable();
+    $unViaje= new Viaje($codigo,$destino,$cmp,$responsableViaje);
     return $unViaje;
 }
 /**
@@ -272,7 +290,7 @@ function codigoOpcion2($elViaje){
                 codigoModificacionPasajero($elViaje);
                 break;
             case 4://modificar responsable
-                $elViaje->setResponsableViaje($elViaje);
+                $elViaje->setResponsableViaje(modificarResponsableViaje($elViaje));
 
                 
 

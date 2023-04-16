@@ -13,7 +13,7 @@ class Viaje{
         $this->codigo_vaje=$codigoViaje;
         $this->destino_viaje=$destino;
         $this->cant_max_pasajeros=$cantMaxPasajeros;
-        $this->responsableViaje->$responsableViaje;
+        $this->responsableViaje=$responsableViaje;
         $this->pasajeros=[];
         
         
@@ -112,8 +112,9 @@ class Viaje{
         return "Codigo de viaje: ".$this->getCodigo_viaje().
         "\nDestino: ".$this->getDestino_viaje().
         "\nCantidad Maxima de Pasajeros: ".$this->getCantidadPasajerosMaxima().
-        "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros().
-        "\nResponsable del viaje: ".$this->getResponsableViaje();
+        "\nResponsable del viaje:\n ".$this->getResponsableViaje().
+        "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros();
+        
     }
 }
 ?>
