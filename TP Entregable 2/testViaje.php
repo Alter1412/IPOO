@@ -186,8 +186,15 @@ function codigoModificacionPasajero($v){
                         $llenarLugar=elementoVacio($pasajeros, $v->getCantidadPasajerosMaxima());
                         if($llenarLugar!=-1 && $llenarLugar<$v->getCantidadPasajerosMaxima()){
                             $pasajeros[$llenarLugar]=agregarPasajeros();
-                            $v->setPasajeros($pasajeros);
-                            echo "Pasajero agregado\n";
+                            $estaRepetido=pasajerosIguales($pasajeros,$pasajeros[$llenarLugar]);
+                                if($estaRepetido){
+                                    echo "El pasajero ya se encuentra en la lista.\n";
+                                }else{
+                                    $v->setPasajeros($pasajeros);
+                                    echo "Pasajero agregado\n";
+
+                                }
+                            
                         }else{
                             echo "Lista llena.\n";
                             echo "Cantidad de pasajeros maxima alcansada\n";
@@ -321,6 +328,27 @@ function elementoVacio($arrayPasajeros,$maxPasajeros){
     }
     return $posicion;
 }
+
+/**
+ * Funcion que verifica si un pasajero ya se encuntra en 
+ * la lista de pasajeros(Arreglo de pasajeros)
+ * retirna true si lo encuentra, false caso contrario
+ * @param array $listaPasajeros
+ * @param Pasajeros $pasajero
+ * @return boolean
+ */
+function pasajerosIguales($listaPasajeros,$unPasajero){
+    $repetido=false;
+    $i=0;
+    while($i<count($listaPasajeros) && $repetido==false){
+        if($unPasajero==$listaPasajeros[$i]){
+            $repetido=true;
+        }
+        $i++;
+    }
+    return $repetido;
+
+}
 //CODIGO PRINCIPAL
 
 echo "--------------------------------------\n";
@@ -367,7 +395,12 @@ do{
                             $llenarLugarPasajero=elementoVacio($listaPasajeros, $viaje->getCantidadPasajerosMaxima());
                             if($llenarLugarPasajero!=-1 && $llenarLugarPasajero<$viaje->getCantidadPasajerosMaxima()){
                                 $listaPasajeros[$llenarLugarPasajero]=agregarPasajeros();
+                                $estaRepetido=pasajerosIguales($listaPasajeros,$listaPasajeros[$llenarLugarPasajero]);
+                                if($estaRepetido){
+                                    echo "El pasajero ya se encuentra en la lista.\n";
+                                }else{
                                 $viaje->setPasajeros($listaPasajeros);
+                                }
                             }else{
                                 echo "Lista llena.\n";
                         }
