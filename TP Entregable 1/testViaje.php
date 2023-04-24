@@ -1,5 +1,5 @@
 <?php
-//llamo al arvhivo de la clase Viaje test de sumbit en nueva compu
+//llamo al arvhivo de la clase Viaje
 include 'Viaje.php';
 
 
