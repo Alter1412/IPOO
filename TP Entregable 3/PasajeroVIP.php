@@ -30,5 +30,17 @@ class PasajeroVIP extends Pasajero{
         return $texto."N° pasajero Recuente: ".$this->getNumPasajeroRecuente().
         "\nCantidad de Millas: ".$this->getCantMillas()."\n";
     }
+
+    public function darPorcentajeIncremento(){
+        //esta es una redifinicion total, ya que no se llama al padre pero tiene el mismo nombre
+        //existe redifinicion parcial, en la que se llama al parent
+        //y luego esta la herencia(metodo heredado del padre)
+        if($this->getCantMillas()<300){
+            $porcentajeIncremento=30;
+        }else{
+            $porcentajeIncremento=35;
+        }
+        return $porcentajeIncremento;
+    }
 }
 ?>

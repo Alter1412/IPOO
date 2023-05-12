@@ -1,5 +1,6 @@
 <?php
 class PasajroEspecial extends Pasajero{
+    //los datos son booleanos
     private $silla_de_rueda;
     private $asistencia;
     private $comidas_especiales;
@@ -33,12 +34,35 @@ class PasajroEspecial extends Pasajero{
         $this->comidas_especiales=$comidas_especiales;
     }
 
+    private function toStringAux($necesidad){
+        if($necesidad){
+            $texto="si";
+        }else{
+            $texto="no";
+        }
+        return $texto;
+    }
+
     public function __toString()
     {
         $textoPadre=parent::__toString();
-        return $textoPadre."Silla de Rueda: ".$this->getSillaDeRueda().
-        "\nAsistencia: ".$this->getAsistencia().
-        "\nComidas Especiales: ".$this->getComidasEspeciales()."\n";
+        
+        return $textoPadre."Silla de Rueda: ".$this->toStringAux($this->getSillaDeRueda()).
+        "\nAsistencia: ".$this->toStringAux($this->getAsistencia()).
+        "\nComidas Especiales: ".$this->toStringAux($this->getComidasEspeciales())."\n";
+    }
+
+
+
+    public function darPorcentajeIncremento(){
+        if($this->getSillaDeRueda() && $this->getAsistencia() && $this->getComidasEspeciales()){
+            $incremento=30;
+        }elseif(($this->getSillaDeRueda() && !$this->getAsistencia() && !$this->getComidasEspeciales()) ||
+                (!$this->getSillaDeRueda() && $this->getAsistencia() && !$this->getComidasEspeciales()) ||
+                (!$this->getSillaDeRueda() && !$this->getAsistencia() && $this->getComidasEspeciales())){
+            $incremento=15;
+        }
+        return $incremento;
     }
 }
 ?>

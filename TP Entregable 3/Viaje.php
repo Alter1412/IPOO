@@ -5,16 +5,19 @@ class Viaje{
     private $cant_max_pasajeros;
     private $pasajeros;// ahora son objetos Pasajeros
     private $responsableViaje;
+    private $costoViaje;
+    private $importeTotal;
     
     /**
      * Metodo construct del objeto Viaje
      */
-    public function __construct($codigoViaje,$destino,$cantMaxPasajeros,$responsableViaje){
+    public function __construct($codigoViaje,$destino,$cantMaxPasajeros,$responsableViaje,$costoViaje){
         $this->codigo_vaje=$codigoViaje;
         $this->destino_viaje=$destino;
         $this->cant_max_pasajeros=$cantMaxPasajeros;
         $this->responsableViaje=$responsableViaje;
         $this->pasajeros=[];
+        $this->costoViaje=$costoViaje;
         
         
     }
@@ -54,6 +57,18 @@ class Viaje{
     public function setResponsableViaje($responableViaje){
         $this->responsableViaje=$responableViaje;
     }
+    /**
+     * Metodo que asigna el costo del viaje
+     */
+    public function setCostoViaje($costoViaje){
+        $this->costoViaje=$costoViaje;
+    }
+    /**
+     * Metodo que asigna el importe total del viaje
+     */
+    public function setImporteTotal($importeTotal){
+        $this->importeTotal=$importeTotal;
+    }
   
     //metodos get
     /**
@@ -85,6 +100,20 @@ class Viaje{
     public function getResponsableViaje(){
         return $this->responsableViaje;
     }
+    /**
+     * metodo que retorna el costo del viaje
+     */
+    public function getCostoViaje(){
+        return $this->costoViaje;
+    }
+    /**
+     * metodo que retorna el importe total del viaje
+     */
+    public function getImporteTotal(){
+        return $this->importeTotal;
+    }
+
+
     /**
      * metodo que retorna una variable que contiene una cadena de string
      */
@@ -135,6 +164,19 @@ class Viaje{
         }
         return $encontrado;
     }
+    /**
+     * retorna verdadero si la cantidad de pasajeros del viaje es menor a la cantidad máxima de pasajeros y
+     *  falso caso contrario
+     */
+    public function  hayPasajesDisponible(){
+        $limite=$this->getCantidadPasajerosMaxima();
+        $cantPasajeros=count($this->getPasajeros());
+        $disponible=false;
+        if($cantPasajeros<$limite){
+            $disponible=true;
+        }
+        return $disponible;
+    }
 
     /**
      * Funcion que agrega pasajeros.
@@ -145,9 +187,8 @@ class Viaje{
         $colPasajeros=$this->getPasajeros();
         $verificacion=$this->verificaPasajero($objPasajero);
         $agregado=false;
-        $limite=$this->getCantidadPasajerosMaxima();
-        $cantPasajeros=count($this->getPasajeros());
-        if($cantPasajeros<$limite){
+        $disponibilidad=$this->hayPasajesDisponible();
+        if($disponibilidad){
             if($verificacion==false){
                 array_push($colPasajeros,$objPasajero);
                 $this->setPasajeros($colPasajeros);
@@ -166,19 +207,28 @@ class Viaje{
     public function buscarPasajero($dniPasajero){
         $colPasajeros=$this->getPasajeros();
         $i=0;
-        $indice=-1;
+        $pasajeroEncontrado=null;
         $encontrado=false;
         while($i<count($colPasajeros) && $encontrado==false){
             $dniUnPasajero=$colPasajeros[$i]->getNumeroDocumento();
             if($dniPasajero==$dniUnPasajero){
-                $indice=$i;
+                $pasajeroEncontrado=$colPasajeros[$i];
                 $encontrado=true;
             }
             $i++;
         }
-        return $indice;
+        return $pasajeroEncontrado;
     }
 
-    
+    public function venderPasaje($objPasajero){
+        $agregado=$this->agregarPasajero($objPasajero);
+        $suma=-1;
+        if($agregado){
+            $importe=$this->getCostoViaje();
+            $suma=$importe+$this->getImporteTotal();
+        }
+        return $suma;
+    }
+
 }
 ?>
