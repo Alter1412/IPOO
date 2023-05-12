@@ -1,16 +1,16 @@
 <?php
 class Pasajeros{
     private $nombre;
-    private $apellido;
-    private $numeroDocumento;
-    private $telefono;
+    private $num_asiento;
+    private $numeroTicket;
 
-    public function __construct($nombre,$apellido,$numeroDocumento,$telefono)
+
+    public function __construct($nombre,$num_asiento,$numeroTicket)
     {
         $this->nombre=$nombre;
-        $this->apellido=$apellido;
-        $this->numeroDocumento=$numeroDocumento;
-        $this->telefono=$telefono;
+        $this->num_asiento=$num_asiento;
+        $this->numeroTicket=$numeroTicket;
+        
     }
 
     //Set
@@ -18,17 +18,15 @@ class Pasajeros{
         $this->nombre=$nombre;
     }
 
-    public function setApellido($apellido){
-        $this->apellido=$apellido;
+    public function setApellido($num_asiento){
+        $this->num_asiento=$num_asiento;
     }
 
-    public function setNumeroDocumento($numeroDocumento){
-        $this->numeroDocumento=$numeroDocumento;
+    public function setNumeroTicket($numeroTicket){
+        $this->numeroTicket=$numeroTicket;
     }
 
-    public function setTelefono($telefono){
-        $this->telefono=$telefono;
-    }
+   
 
     //Gets
 
@@ -36,17 +34,15 @@ class Pasajeros{
         return $this->nombre;
     }
 
-    public function getApellido(){
-        return $this->apellido;
+    public function getNumAsiento(){
+        return $this->num_asiento;
     }
 
-    public function getNumeroDocumento(){
-        return $this->numeroDocumento;
+    public function getNumeroTicket(){
+        return $this->numeroTicket;
     }
 
-    public function getTelefono(){
-        return $this->telefono;
-    }
+    
 
     //__toString
 
@@ -54,9 +50,8 @@ class Pasajeros{
     {
         return 
         "Nombre: ".$this->getNombre().
-        "\nApelido: ".$this->getApellido().
-        "\nNumero de Documento: ".$this->getNumeroDocumento().
-        "\nTelefono: ".$this->getTelefono();
+        "\nN° de asiento: ".$this->getNumAsiento().
+        "\nNumero de Ticket: ".$this->getNumeroTicket()."\n";
     }
 }
 ?>
