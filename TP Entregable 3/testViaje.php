@@ -93,7 +93,7 @@ function codigoOpcion1(){
     return $unViaje;
 }
 /**
- * funcion que agrega pasajeros
+ * funcion que crea pasajeros
  */
 function agregarPasajeros(){
     echo "Ingrese el nombre del pasajero: \n";

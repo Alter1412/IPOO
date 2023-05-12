@@ -118,5 +118,67 @@ class Viaje{
         "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros();
         
     }
+
+    //metodos propios del viaje
+
+
+    //metodo que verifica si un pasajero ya esta agregado a la coleccion
+    public function verificaPasajero($objPasajero){
+        $coleccion=$this->getPasajeros();//coleccion de pasajeros
+        $encontrado=false;
+        $i=0;
+        while($i<count($coleccion) && $encontrado==false){
+            $unPasajero=$coleccion[$i];
+            if($objPasajero==$unPasajero){
+                $encontrado=true;
+            }
+        }
+        return $encontrado;
+    }
+
+    /**
+     * Funcion que agrega pasajeros.
+     * retorna false si el pasajero ya se encuentra en la lista.
+     * true si se agrego a la lista
+     */
+    public function agregarPasajero($objPasajero){
+        $colPasajeros=$this->getPasajeros();
+        $verificacion=$this->verificaPasajero($objPasajero);
+        $agregado=false;
+        $limite=$this->getCantidadPasajerosMaxima();
+        $cantPasajeros=count($this->getPasajeros());
+        if($cantPasajeros<$limite){
+            if($verificacion==false){
+                array_push($colPasajeros,$objPasajero);
+                $this->setPasajeros($colPasajeros);
+                $agregado=true;
+            }
+        }
+        return $agregado;
+        
+    }
+
+    /**
+     * Funcion que busca un pasajero segun su dni
+     * y retorna su indice.
+     * retorna -1 si no lo encuentra
+     */
+    public function buscarPasajero($dniPasajero){
+        $colPasajeros=$this->getPasajeros();
+        $i=0;
+        $indice=-1;
+        $encontrado=false;
+        while($i<count($colPasajeros) && $encontrado==false){
+            $dniUnPasajero=$colPasajeros[$i]->getNumeroDocumento();
+            if($dniPasajero==$dniUnPasajero){
+                $indice=$i;
+                $encontrado=true;
+            }
+            $i++;
+        }
+        return $indice;
+    }
+
+    
 }
 ?>
