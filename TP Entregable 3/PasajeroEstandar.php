@@ -10,5 +10,9 @@ class PasajeroEstandar extends Pasajero{
     {
         return parent::__toString();
     }
+
+    public function darPorcentajeIncremento(){
+        return 10;
+    }
 }
 ?>

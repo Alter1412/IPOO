@@ -83,8 +83,6 @@ class Pasajero{
         "\nNumero de Ticket: ".$this->getNumeroTicket()."\n";
     }
 
-    public function darPorcentajeIncremento(){
-        return 10;
-    }
+   
 }
 ?>
