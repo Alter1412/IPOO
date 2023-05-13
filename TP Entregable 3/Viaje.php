@@ -230,5 +230,25 @@ class Viaje{
         return $suma;
     }
 
+    /**
+     * Funcion que elimina a un pasajero.
+     * Retorna true si lo borro, false caso contrario
+     */
+    public function eliminarPasajero($dniPasajero){
+        $colPasajeros=$this->getPasajeros();
+        $i=0;
+        $borrado=false;
+        while($i<count($colPasajeros) && $borrado==false){
+            $dniUnPasajero=$colPasajeros[$i]->getNumeroDocumento();
+            if($dniPasajero==$dniUnPasajero){
+                unset($colPasajeros[$i]);
+                $this->setPasajeros($colPasajeros);
+                $borrado=true;
+            }
+            $i++;
+        }
+        return $borrado;
+    }
+
 }
 ?>

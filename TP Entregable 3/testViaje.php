@@ -332,7 +332,7 @@ function elementoVacio($arrayPasajeros,$maxPasajeros){
 }
 
 /**
- * Funcion que verifica si un pasajero ya se encuntra en 
+ * Funcion que verifica si un pasajero ya se encuntra en
  * la lista de pasajeros(Arreglo de pasajeros)
  * retirna true si lo encuentra, false caso contrario
  * @param array $listaPasajeros

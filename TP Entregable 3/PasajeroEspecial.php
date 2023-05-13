@@ -1,5 +1,5 @@
 <?php
-class PasajroEspecial extends Pasajero{
+class PasajeroEspecial extends Pasajero{
     //los datos son booleanos
     private $silla_de_rueda;
     private $asistencia;
