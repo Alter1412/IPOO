@@ -190,7 +190,8 @@ class Viaje{
         $disponibilidad=$this->hayPasajesDisponible();
         if($disponibilidad){
             if($verificacion==false){
-                array_push($colPasajeros,$objPasajero);
+                $colPasajeros[]=$objPasajero;
+                //array_push($colPasajeros,$objPasajero);
                 $this->setPasajeros($colPasajeros);
                 $agregado=true;
             }
@@ -226,8 +227,9 @@ class Viaje{
         if($agregado){
             $importe=$this->getCostoViaje();
             $suma=$importe+$this->getImporteTotal();
+            $this->setImporteTotal($suma);
         }
-        return $suma;
+        return $importe;
     }
 
     /**

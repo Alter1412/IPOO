@@ -428,3 +428,79 @@ do{
 
 
 ?>
+
+switch($tipo){
+        case 1:
+            echo "Ingrese el nombre del pasajero: \n";
+            $nombre=trim(fgets(STDIN));
+            echo "Ingrese el apellido del pasajero\n";
+            $apellido=trim(fgets(STDIN));
+            echo "Ingrese el dni del pasajero\n";
+            $dni=trim(fgets(STDIN));
+            echo "Ingrese el numero de Telefono:\n";
+            $telefono=trim(fgets(STDIN));
+            echo "Ingrese el N° de asiento:\n";
+            $numAsiento=trim(fgets(STDIN));
+            echo "Ingrese el N° de Ticket:\n";
+            $numTicket=trim(fgets(STDIN));
+            $un_pasajero= new PasajeroEstandar($nombre,$apellido,$dni,$telefono,$numAsiento,$numTicket);
+            break;
+        case 2:
+            echo "Ingrese el nombre del pasajero: \n";
+            $nombre=trim(fgets(STDIN));
+            echo "Ingrese el apellido del pasajero\n";
+            $apellido=trim(fgets(STDIN));
+            echo "Ingrese el dni del pasajero\n";
+            $dni=trim(fgets(STDIN));
+            echo "Ingrese el numero de Telefono:\n";
+            $telefono=trim(fgets(STDIN));
+            echo "Ingrese el N° de asiento:\n";
+            $numAsiento=trim(fgets(STDIN));
+            echo "Ingrese el N° de Ticket:\n";
+            $numTicket=trim(fgets(STDIN));
+            echo "Ingrese N° de pasajero Recuente:\n";
+            $num_pasajero_recuente=trim(fgets(STDIN));
+            echo "Ingrese la cantidad de Millas:\n";
+            $cant_millas=trim(fgets(STDIN));
+            $un_pasajero= new PasajeroVIP($nombre,$apellido,$dni,$telefono,$numAsiento,
+                                            $numTicket,$num_pasajero_recuente,$cant_millas);
+            break;
+        case 3:
+            echo "Ingrese el nombre del pasajero: \n";
+            $nombre=trim(fgets(STDIN));
+            echo "Ingrese el apellido del pasajero\n";
+            $apellido=trim(fgets(STDIN));
+            echo "Ingrese el dni del pasajero\n";
+            $dni=trim(fgets(STDIN));
+            echo "Ingrese el numero de Telefono:\n";
+            $telefono=trim(fgets(STDIN));
+            echo "Ingrese el N° de asiento:\n";
+            $numAsiento=trim(fgets(STDIN));
+            echo "Ingrese el N° de Ticket:\n";
+            $numTicket=trim(fgets(STDIN));
+            echo "Necesita silla de ruedas?:\n";
+            $respuesta1=trim(fgets(STDIN));
+            if($respuesta1=="si" || $respuesta1=="si" || $respuesta1=="SI"){
+                $silla_de_rueda=true;
+            }else{
+                $silla_de_rueda=false;
+            }
+            echo "Necesita asistencia en el embarque y desenbarque?\n";
+            $respuesta2=trim(fgets(STDIN));
+            if($respuesta2=="si" || $respuesta2=="si" || $respuesta2=="SI"){
+                $asistencia=true;
+            }else{
+                $asistencia=false;
+            }
+            echo "Necesita Comida Especial?\n";
+            $respuesta3=trim(fgets(STDIN));
+            if($respuesta3=="si" || $respuesta3=="si" || $respuesta3=="SI"){
+                $comidas_especiales=true;
+            }else{
+                $comidas_especiales=false;
+            }
+            $un_pasajero= new PasajeroEspecial($nombre,$apellido,$dni,$telefono,$numAsiento,
+                                $numTicket,$silla_de_rueda,$asistencia,$comidas_especiales);
+            break;
+             
+    }
