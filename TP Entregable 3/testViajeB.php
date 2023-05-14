@@ -155,47 +155,48 @@ function tipoDePasajero(){
     echo "+ 3- Especial                +\n";
     echo "+----------------------------+\n";
 }
-/**
- * funcion que crea pasajeros
- */
-function cargarPasajeros(){
-    tipoDePasajero();
-    $tipo=trim(fgets(STDIN));
-    if($tipo==1){
-        echo "Ingrese el nombre del pasajero: \n";
-        $nombre=trim(fgets(STDIN));
-        echo "Ingrese el apellido del pasajero\n";
-        $apellido=trim(fgets(STDIN));
-        echo "Ingrese el dni del pasajero\n";
-        $dni=trim(fgets(STDIN));
-        echo "Ingrese el numero de Telefono:\n";
-        $telefono=trim(fgets(STDIN));
-        echo "Ingrese el N° de asiento:\n";
-        $numAsiento=trim(fgets(STDIN));
-        echo "Ingrese el N° de Ticket:\n";
-        $numTicket=trim(fgets(STDIN));
-        $un_pasajero= new PasajeroEstandar($nombre,$apellido,$dni,$telefono,$numAsiento,$numTicket);
-    }elseif($tipo==2){
-        echo "Ingrese el nombre del pasajero: \n";
-            $nombre=trim(fgets(STDIN));
-            echo "Ingrese el apellido del pasajero\n";
-            $apellido=trim(fgets(STDIN));
-            echo "Ingrese el dni del pasajero\n";
-            $dni=trim(fgets(STDIN));
-            echo "Ingrese el numero de Telefono:\n";
-            $telefono=trim(fgets(STDIN));
-            echo "Ingrese el N° de asiento:\n";
-            $numAsiento=trim(fgets(STDIN));
-            echo "Ingrese el N° de Ticket:\n";
-            $numTicket=trim(fgets(STDIN));
-            echo "Ingrese N° de pasajero Recuente:\n";
-            $num_pasajero_recuente=trim(fgets(STDIN));
-            echo "Ingrese la cantidad de Millas:\n";
-            $cant_millas=trim(fgets(STDIN));
-            $un_pasajero= new PasajeroVIP($nombre,$apellido,$dni,$telefono,$numAsiento,
-                                            $numTicket,$num_pasajero_recuente,$cant_millas);
-    }elseif($tipo==3){
-        echo "Ingrese el nombre del pasajero: \n";
+
+function cargaPasajeroEstandar(){
+    echo "Ingrese el nombre del pasajero: \n";
+    $nombre=trim(fgets(STDIN));
+    echo "Ingrese el apellido del pasajero\n";
+    $apellido=trim(fgets(STDIN));
+    echo "Ingrese el dni del pasajero\n";
+    $dni=trim(fgets(STDIN));
+    echo "Ingrese el numero de Telefono:\n";
+    $telefono=trim(fgets(STDIN));
+    echo "Ingrese el N° de asiento:\n";
+    $numAsiento=trim(fgets(STDIN));
+    echo "Ingrese el N° de Ticket:\n";
+    $numTicket=trim(fgets(STDIN));
+    $un_pasajero= new PasajeroEstandar($nombre,$apellido,$dni,$telefono,$numAsiento,$numTicket);
+    return $un_pasajero;
+}
+
+function cargarPAsajeroVIP(){
+    echo "Ingrese el nombre del pasajero: \n";
+    $nombre=trim(fgets(STDIN));
+    echo "Ingrese el apellido del pasajero\n";
+    $apellido=trim(fgets(STDIN));
+    echo "Ingrese el dni del pasajero\n";
+    $dni=trim(fgets(STDIN));
+    echo "Ingrese el numero de Telefono:\n";
+    $telefono=trim(fgets(STDIN));
+    echo "Ingrese el N° de asiento:\n";
+    $numAsiento=trim(fgets(STDIN));
+    echo "Ingrese el N° de Ticket:\n";
+    $numTicket=trim(fgets(STDIN));
+    echo "Ingrese N° de pasajero Recuente:\n";
+    $num_pasajero_recuente=trim(fgets(STDIN));
+    echo "Ingrese la cantidad de Millas:\n";
+    $cant_millas=trim(fgets(STDIN));
+    $un_pasajero= new PasajeroVIP($nombre,$apellido,$dni,$telefono,$numAsiento,
+                                    $numTicket,$num_pasajero_recuente,$cant_millas);
+    return $un_pasajero;
+}
+
+function cargarPasajeroEspecial(){
+    echo "Ingrese el nombre del pasajero: \n";
             $nombre=trim(fgets(STDIN));
             echo "Ingrese el apellido del pasajero\n";
             $apellido=trim(fgets(STDIN));
@@ -230,8 +231,26 @@ function cargarPasajeros(){
             }
             $un_pasajero= new PasajeroEspecial($nombre,$apellido,$dni,$telefono,$numAsiento,
                                 $numTicket,$silla_de_rueda,$asistencia,$comidas_especiales);
+            return $un_pasajero;
+}
+/**
+ * funcion que crea pasajeros
+ */
+function cargarPasajeros(){
+    tipoDePasajero();
+    $tipo=trim(fgets(STDIN));
+    switch($tipo){
+        case 1:
+            $un_pasajero=cargaPasajeroEstandar();
+            break;
+        case 2:
+            $un_pasajero=cargarPAsajeroVIP();
+            break;
+        case 3:
+            $un_pasajero=cargarPasajeroEspecial();
+            break;
+             
     }
-    
     return $un_pasajero;
 }
 /**
@@ -561,13 +580,24 @@ do{
             if($viaje==null){
                 echo "Carge un Viaje\n";
             }else{
-                $un_pasajero=cargarPasajeros();
-                $importe=$viaje->venderPasaje($un_pasajero);
-                if($importe!=-1){
-                    echo "Total a pagar: ".$viaje->getCostoViaje()."\n";
+                $disponibilidad=$viaje->hayPasajesDisponible();
+                if($disponibilidad){
+                    $un_pasajero=cargarPasajeros();
+                    $repetido=$viaje->verificaPasajero($un_pasajero);
+                    if(!$repetido){
+                        $importe=$viaje->venderPasaje($un_pasajero);
+                        if($importe!=-1){
+                            echo "Total a pagar: ".$importe."\n";
+                        }else{
+                            echo "No se pudo realizar la venta.\n";
+                        }
+                    }else{
+                        echo "Ya existe el pasajero\n";
+                    }
                 }else{
-                    echo "No se pudo realizar la venta.\n";
+                    echo "No hay Pasajes Disponibles\n";
                 }
+                
             }
             
             break;

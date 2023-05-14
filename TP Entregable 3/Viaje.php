@@ -6,7 +6,7 @@ class Viaje{
     private $pasajeros;// ahora son objetos Pasajeros
     private $responsableViaje;
     private $costoViaje;
-    private $importeTotal;
+    private $costoRecaudado;
     
     /**
      * Metodo construct del objeto Viaje
@@ -66,8 +66,8 @@ class Viaje{
     /**
      * Metodo que asigna el importe total del viaje
      */
-    public function setImporteTotal($importeTotal){
-        $this->importeTotal=$importeTotal;
+    public function setCostoRecaudado($costoRecaudado){
+        $this->costoRecaudado=$costoRecaudado;
     }
   
     //metodos get
@@ -109,8 +109,8 @@ class Viaje{
     /**
      * metodo que retorna el importe total del viaje
      */
-    public function getImporteTotal(){
-        return $this->importeTotal;
+    public function getCostoRecaudado(){
+        return $this->costoRecaudado;
     }
 
 
@@ -144,7 +144,9 @@ class Viaje{
         "\nDestino: ".$this->getDestino_viaje().
         "\nCantidad Maxima de Pasajeros: ".$this->getCantidadPasajerosMaxima().
         "\nResponsable del viaje: \n".$this->getResponsableViaje().
-        "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros();
+        "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros().
+        "\nCosto del Viaje: ".$this->getCostoViaje().
+        "\nCosto Recaudado: ".$this->getCostoRecaudado();
         
     }
 
@@ -168,7 +170,7 @@ class Viaje{
      * retorna verdadero si la cantidad de pasajeros del viaje es menor a la cantidad máxima de pasajeros y
      *  falso caso contrario
      */
-    public function  hayPasajesDisponible(){
+    public function hayPasajesDisponible(){
         $limite=$this->getCantidadPasajerosMaxima();
         $cantPasajeros=count($this->getPasajeros());
         $disponible=false;
@@ -185,18 +187,18 @@ class Viaje{
      */
     public function agregarPasajero($objPasajero){
         $colPasajeros=$this->getPasajeros();
-        $verificacion=$this->verificaPasajero($objPasajero);
-        $agregado=false;
-        $disponibilidad=$this->hayPasajesDisponible();
-        if($disponibilidad){
-            if($verificacion==false){
-                $colPasajeros[]=$objPasajero;
-                //array_push($colPasajeros,$objPasajero);
+        //$verificacion=$this->verificaPasajero($objPasajero);
+       // $agregado=false;
+       // $disponibilidad=$this->hayPasajesDisponible();
+        //if($disponibilidad){
+           // if($verificacion==false){
+                //$colPasajeros[]=$objPasajero;
+                array_push($colPasajeros,$objPasajero);
                 $this->setPasajeros($colPasajeros);
-                $agregado=true;
-            }
-        }
-        return $agregado;
+                //$agregado=true;
+            //}
+        //}
+        //return $agregado;
         
     }
 
@@ -221,15 +223,38 @@ class Viaje{
         return $pasajeroEncontrado;
     }
 
+    private function calculoDelIncremento($objPasajero){
+        $incremento=$objPasajero->darPorcentajeIncremento();
+        $importe=$this->getCostoViaje();
+        $importeAPagar=$importe+(($importe*$incremento)/100);
+        $suma=$importeAPagar+$this->getCostoRecaudado();
+        $this->setCostoRecaudado($suma);
+        return $importeAPagar;
+    }
+
     public function venderPasaje($objPasajero){
-        $agregado=$this->agregarPasajero($objPasajero);
+        /*$agregado=*/$this->agregarPasajero($objPasajero);
         $suma=-1;
-        if($agregado){
-            $importe=$this->getCostoViaje();
-            $suma=$importe+$this->getImporteTotal();
-            $this->setImporteTotal($suma);
-        }
-        return $importe;
+        $estandar= new ReflectionClass('PasajeroEstandar');
+        $vip= new ReflectionClass('PasajeroVIP');
+        $especial= new ReflectionClass('PasajeroEspecial');
+        $importeAPagar=-1;
+        //if($agregado){
+            if($objPasajero instanceof PasajeroEstandar){
+               
+                $importeAPagar=$this->calculoDelIncremento($objPasajero);
+                
+            }elseif($objPasajero instanceof PasajeroVIP){
+               
+                $importeAPagar=$this->calculoDelIncremento($objPasajero);
+                
+            }elseif($objPasajero instanceof PasajeroEspecial){
+
+                $importeAPagar=$this->calculoDelIncremento($objPasajero);
+            }
+           
+        //}
+        return $importeAPagar;
     }
 
     /**
