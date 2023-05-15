@@ -442,6 +442,8 @@ function modificarUnPasajero($viaje){
            
             }while($s!=0 );
         }
+    }else{
+        echo "Pasajero no encontrado\n";
     }
    
    
