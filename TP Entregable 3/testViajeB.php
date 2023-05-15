@@ -282,166 +282,166 @@ function modificarUnPasajero($viaje){
     echo "Ingrese el DNI del Pasajero a Modificar:\n";
     $dniPasajero=trim(fgets(STDIN));
     $elPasajero=$viaje->buscarPasajero($dniPasajero);
+    if($elPasajero!=null){
+        if($elPasajero instanceof PasajeroEstandar){
+            do{
+        
+                menuModificarPasajeroEstandar();
+                $s=trim(fgets(STDIN));
+                switch ($s){
+                    case 1:
+                        echo "Ingrese el nuevo nombre: \n";
+                        $nuevoNombre=trim(fgets(STDIN));
+                        $elPasajero->setNombre($nuevoNombre);
+                        break;
+                    case 2:
+                        echo "Ingrese el nuevo apellido: \n";
+                        $nuevoApellido=trim(fgets(STDIN));
+                        $elPasajero->setApellido($nuevoApellido);
+                        break;
+                    case 3:
+                        echo "Ingrese el nuevo DNI:\n";
+                        $nuevoDni=trim(fgets(STDIN));
+                        $elPasajero->setNumeroDocumento($nuevoDni);
+                        break;
+                    case 4:
+                        echo "Ingrese el nuevo telefono:\n";
+                        $nuevoTelefono=trim(fgets(STDIN));
+                        $elPasajero->setTelefono($nuevoTelefono);
+                        break;
+                    case 5:
+                        echo "Ingrese el nuevo Numero de Asiento:\n";
+                        $nuevoAsiento=trim(fgets(STDIN));
+                        $elPasajero->setNumAsiento($nuevoAsiento);
+                        break;
+                    case 6:
+                        echo "Ingrese el nuevo Numero de Ticket:\n";
+                        $nuevoTicket=trim(fgets(STDIN));
+                        $elPasajero->setNumeroTicket($nuevoTicket);
+                        break;
+                
+                }
+           
+            }while($s!=7);
+        }elseif($elPasajero instanceof PasajeroVIP){
+            do{
 
-    if($elPasajero instanceof PasajeroEstandar){
-        do{
-        
-            menuModificarPasajeroEstandar();
-            $s=trim(fgets(STDIN));
-            switch ($s){
-                case 1:
-                    echo "Ingrese el nuevo nombre: \n";
-                    $nuevoNombre=trim(fgets(STDIN));
-                    $elPasajero->setNombre($nuevoNombre);
-                    break;
-                case 2:
-                    echo "Ingrese el nuevo apellido: \n";
-                    $nuevoApellido=trim(fgets(STDIN));
-                    $elPasajero->setApellido($nuevoApellido);
-                    break;
-                case 3:
-                    echo "Ingrese el nuevo DNI:\n";
-                    $nuevoDni=trim(fgets(STDIN));
-                    $elPasajero->setNumeroDocumento($nuevoDni);
-                    break;
-                case 4:
-                    echo "Ingrese el nuevo telefono:\n";
-                    $nuevoTelefono=trim(fgets(STDIN));
-                    $elPasajero->setTelefono($nuevoTelefono);
-                    break;
-                case 5:
-                    echo "Ingrese el nuevo Numero de Asiento:\n";
-                    $nuevoAsiento=trim(fgets(STDIN));
-                    $elPasajero->setNumAsiento($nuevoAsiento);
-                    break;
-                case 6:
-                    echo "Ingrese el nuevo Numero de Ticket:\n";
-                    $nuevoTicket=trim(fgets(STDIN));
-                    $elPasajero->setNumeroTicket($nuevoTicket);
-                    break;
+                menuModificarPasajeroVip();
+                $s=trim(fgets(STDIN));
+                switch ($s){
+                    case 1:
+                        echo "Ingrese el nuevo nombre: \n";
+                        $nuevoNombre=trim(fgets(STDIN));
+                        $elPasajero->setNombre($nuevoNombre);
+                        break;
+                    case 2:
+                        echo "Ingrese el nuevo apellido: \n";
+                        $nuevoApellido=trim(fgets(STDIN));
+                        $elPasajero->setApellido($nuevoApellido);
+                        break;
+                    case 3:
+                        echo "Ingrese el nuevo DNI:\n";
+                        $nuevoDni=trim(fgets(STDIN));
+                        $elPasajero->setNumeroDocumento($nuevoDni);
+                        break;
+                    case 4:
+                        echo "Ingrese el nuevo telefono:\n";
+                        $nuevoTelefono=trim(fgets(STDIN));
+                        $elPasajero->setTelefono($nuevoTelefono);
+                        break;
+                    case 5:
+                        echo "Ingrese el nuevo Numero de Asiento:\n";
+                        $nuevoAsiento=trim(fgets(STDIN));
+                        $elPasajero->setNumAsiento($nuevoAsiento);
+                        break;
+                    case 6:
+                        echo "Ingrese el nuevo Numero de Ticket:\n";
+                        $nuevoTicket=trim(fgets(STDIN));
+                        $elPasajero->setNumeroTicket($nuevoTicket);
+                        break;
+                    case 7: 
+                        echo "Ingrese el nuevo N° de Pasajero Recuente:\n";
+                        $nuevoNumRecuente=trim(fgets(STDIN));
+                        $elPasajero->setNumPasajeroRecuente($nuevoNumRecuente);
+                        break;
+                    case 8:
+                        echo "Ingrese la nueva Cantidad de Millas:\n";
+                        $nuevaCantMillas=trim(fgets(STDIN));
+                        $elPasajero->setCantMillas($nuevaCantMillas);
+                        break;
                 
-            }
+                }
            
-        }while($s!=7);
-    }elseif($elPasajero instanceof PasajeroVIP){
-        do{
+            }while($s!=9 );
+        }elseif($elPasajero instanceof PasajeroEspecial){
+            do{
         
         
-            menuModificarPasajeroVip();
-            $s=trim(fgets(STDIN));
-            switch ($s){
-                case 1:
-                    echo "Ingrese el nuevo nombre: \n";
-                    $nuevoNombre=trim(fgets(STDIN));
-                    $elPasajero->setNombre($nuevoNombre);
-                    break;
-                case 2:
-                    echo "Ingrese el nuevo apellido: \n";
-                    $nuevoApellido=trim(fgets(STDIN));
-                    $elPasajero->setApellido($nuevoApellido);
-                    break;
-                case 3:
-                    echo "Ingrese el nuevo DNI:\n";
-                    $nuevoDni=trim(fgets(STDIN));
-                    $elPasajero->setNumeroDocumento($nuevoDni);
-                    break;
-                case 4:
-                    echo "Ingrese el nuevo telefono:\n";
-                    $nuevoTelefono=trim(fgets(STDIN));
-                    $elPasajero->setTelefono($nuevoTelefono);
-                    break;
-                case 5:
-                    echo "Ingrese el nuevo Numero de Asiento:\n";
-                    $nuevoAsiento=trim(fgets(STDIN));
-                    $elPasajero->setNumAsiento($nuevoAsiento);
-                    break;
-                case 6:
-                    echo "Ingrese el nuevo Numero de Ticket:\n";
-                    $nuevoTicket=trim(fgets(STDIN));
-                    $elPasajero->setNumeroTicket($nuevoTicket);
-                    break;
-                case 7: 
-                    echo "Ingrese el nuevo N° de Pasajero Recuente:\n";
-                    $nuevoNumRecuente=trim(fgets(STDIN));
-                    $elPasajero->setNumPasajeroRecuente($nuevoNumRecuente);
-                    break;
-                case 8:
-                    echo "Ingrese la nueva Cantidad de Millas:\n";
-                    $nuevaCantMillas=trim(fgets(STDIN));
-                    $elPasajero->setCantMillas($nuevaCantMillas);
-                    break;
+                menuModificarPasajeroEspecial();
+                $s=trim(fgets(STDIN));
+                switch ($s){
+                    case 1:
+                        echo "Ingrese el nuevo nombre: \n";
+                        $nuevoNombre=trim(fgets(STDIN));
+                        $elPasajero->setNombre($nuevoNombre);
+                        break;
+                    case 2:
+                        echo "Ingrese el nuevo apellido: \n";
+                        $nuevoApellido=trim(fgets(STDIN));
+                        $elPasajero->setApellido($nuevoApellido);
+                        break;
+                    case 3:
+                        echo "Ingrese el nuevo DNI:\n";
+                        $nuevoDni=trim(fgets(STDIN));
+                        $elPasajero->setNumeroDocumento($nuevoDni);
+                        break;
+                    case 4:
+                        echo "Ingrese el nuevo telefono:\n";
+                        $nuevoTelefono=trim(fgets(STDIN));
+                        $elPasajero->setTelefono($nuevoTelefono);
+                        break;
+                    case 5:
+                        echo "Ingrese el nuevo Numero de Asiento:\n";
+                        $nuevoAsiento=trim(fgets(STDIN));
+                        $elPasajero->setNumAsiento($nuevoAsiento);
+                        break;
+                    case 6:
+                        echo "Ingrese el nuevo Numero de Ticket:\n";
+                        $nuevoTicket=trim(fgets(STDIN));
+                        $elPasajero->setNumeroTicket($nuevoTicket);
+                        break;
+                    case 7:
+                        echo "Necesita silla de ruedas?:\n";
+                        $respuesta1=trim(fgets(STDIN));
+                        if($respuesta1=="si" || $respuesta1=="si" || $respuesta1=="SI"){
+                            $elPasajero->setSillaDeRueda(true);
+                        }else{
+                            $elPasajero->setSillaDeRueda(false);;
+                        }
+                        break;
+                    case 8:
+                        echo "Necesita asistencia en el embarque y desenbarque?\n";
+                        $respuesta2=trim(fgets(STDIN));
+                        if($respuesta2=="si" || $respuesta2=="si" || $respuesta2=="SI"){
+                            $elPasajero->setAsistencia(true);
+                        }else{
+                            $elPasajero->setAsistencia(false);
+                        }
+                        break;
+                    case 9:
+                        echo "Necesita Comida Especial?\n";
+                        $respuesta3=trim(fgets(STDIN));
+                        if($respuesta3=="si" || $respuesta3=="si" || $respuesta3=="SI"){
+                            $elPasajero->setComidasEspeciales(true);
+                        }else{
+                            $elPasajero->setComidasEspeciales(false);
+                        }
+                        break;
                 
-            }
+                }
            
-        }while($s!=9 );
-    }elseif($elPasajero instanceof PasajeroEspecial){
-        do{
-        
-        
-            menuModificarPasajeroEspecial();
-            $s=trim(fgets(STDIN));
-            switch ($s){
-                case 1:
-                    echo "Ingrese el nuevo nombre: \n";
-                    $nuevoNombre=trim(fgets(STDIN));
-                    $elPasajero->setNombre($nuevoNombre);
-                    break;
-                case 2:
-                    echo "Ingrese el nuevo apellido: \n";
-                    $nuevoApellido=trim(fgets(STDIN));
-                    $elPasajero->setApellido($nuevoApellido);
-                    break;
-                case 3:
-                    echo "Ingrese el nuevo DNI:\n";
-                    $nuevoDni=trim(fgets(STDIN));
-                    $elPasajero->setNumeroDocumento($nuevoDni);
-                    break;
-                case 4:
-                    echo "Ingrese el nuevo telefono:\n";
-                    $nuevoTelefono=trim(fgets(STDIN));
-                    $elPasajero->setTelefono($nuevoTelefono);
-                    break;
-                case 5:
-                    echo "Ingrese el nuevo Numero de Asiento:\n";
-                    $nuevoAsiento=trim(fgets(STDIN));
-                    $elPasajero->setNumAsiento($nuevoAsiento);
-                    break;
-                case 6:
-                    echo "Ingrese el nuevo Numero de Ticket:\n";
-                    $nuevoTicket=trim(fgets(STDIN));
-                    $elPasajero->setNumeroTicket($nuevoTicket);
-                    break;
-                case 7:
-                    echo "Necesita silla de ruedas?:\n";
-                    $respuesta1=trim(fgets(STDIN));
-                    if($respuesta1=="si" || $respuesta1=="si" || $respuesta1=="SI"){
-                        $elPasajero->setSillaDeRueda(true);
-                    }else{
-                        $elPasajero->setSillaDeRueda(false);;
-                    }
-                    break;
-                case 8:
-                    echo "Necesita asistencia en el embarque y desenbarque?\n";
-                    $respuesta2=trim(fgets(STDIN));
-                    if($respuesta2=="si" || $respuesta2=="si" || $respuesta2=="SI"){
-                        $elPasajero->setAsistencia(true);
-                    }else{
-                        $elPasajero->setAsistencia(false);
-                    }
-                    break;
-                case 9:
-                    echo "Necesita Comida Especial?\n";
-                    $respuesta3=trim(fgets(STDIN));
-                    if($respuesta3=="si" || $respuesta3=="si" || $respuesta3=="SI"){
-                        $elPasajero->setComidasEspeciales(true);
-                    }else{
-                        $elPasajero->setComidasEspeciales(false);
-                    }
-                    break;
-                
-            }
-           
-        }while($s!=0 );
+            }while($s!=0 );
+        }
     }
    
    

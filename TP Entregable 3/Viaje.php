@@ -146,7 +146,7 @@ class Viaje{
         "\nResponsable del viaje: \n".$this->getResponsableViaje().
         "\nLista de Pasajeros: \n".$this->mostrarDatosPasajeros().
         "\nCosto del Viaje: ".$this->getCostoViaje().
-        "\nCosto Recaudado: ".$this->getCostoRecaudado();
+        "\nCosto Recaudado: ".$this->getCostoRecaudado()."\n";
         
     }
 
@@ -183,30 +183,19 @@ class Viaje{
 
     /**
      * Funcion que agrega pasajeros.
-     * retorna false si el pasajero ya se encuentra en la lista.
-     * true si se agrego a la lista
      */
     public function agregarPasajero($objPasajero){
         $colPasajeros=$this->getPasajeros();
-        //$verificacion=$this->verificaPasajero($objPasajero);
-       // $agregado=false;
-       // $disponibilidad=$this->hayPasajesDisponible();
-        //if($disponibilidad){
-           // if($verificacion==false){
-                //$colPasajeros[]=$objPasajero;
-                array_push($colPasajeros,$objPasajero);
-                $this->setPasajeros($colPasajeros);
-                //$agregado=true;
-            //}
-        //}
-        //return $agregado;
+        array_push($colPasajeros,$objPasajero);
+        $this->setPasajeros($colPasajeros);
+               
         
     }
 
     /**
      * Funcion que busca un pasajero segun su dni
-     * y retorna su indice.
-     * retorna -1 si no lo encuentra
+     * y lo retorna
+     * retorna null si no lo encuentra
      */
     public function buscarPasajero($dniPasajero){
         $colPasajeros=$this->getPasajeros();
