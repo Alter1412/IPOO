@@ -163,6 +163,7 @@ class Viaje{
             if($objPasajero==$unPasajero){
                 $encontrado=true;
             }
+            $i++;
         }
         return $encontrado;
     }
