@@ -12,7 +12,9 @@ class PasajeroEstandar extends Pasajero{
     }
 
     public function darPorcentajeIncremento(){
-        return 10;
+        $porc=parent::darPorcentajeIncremento();
+        $incr=$porc+10;
+        return $incr;
     }
 }
 ?>

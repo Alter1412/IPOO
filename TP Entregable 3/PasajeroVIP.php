@@ -35,10 +35,11 @@ class PasajeroVIP extends Pasajero{
         //esta es una redifinicion total, ya que no se llama al padre pero tiene el mismo nombre
         //existe redifinicion parcial, en la que se llama al parent
         //y luego esta la herencia(metodo heredado del padre)
+        $porc=parent::darPorcentajeIncremento();
         if($this->getCantMillas()<300){
-            $porcentajeIncremento=30;
+            $porcentajeIncremento=$porc+30;
         }else{
-            $porcentajeIncremento=35;
+            $porcentajeIncremento=$porc+35;
         }
         return $porcentajeIncremento;
     }

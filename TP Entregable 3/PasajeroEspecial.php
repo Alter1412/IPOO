@@ -55,12 +55,15 @@ class PasajeroEspecial extends Pasajero{
 
 
     public function darPorcentajeIncremento(){
+
+        $porc=parent::darPorcentajeIncremento();
+
         if($this->getSillaDeRueda() && $this->getAsistencia() && $this->getComidasEspeciales()){
-            $incremento=30;
+            $incremento=$porc+30;
         }elseif(($this->getSillaDeRueda() && !$this->getAsistencia() && !$this->getComidasEspeciales()) ||
                 (!$this->getSillaDeRueda() && $this->getAsistencia() && !$this->getComidasEspeciales()) ||
                 (!$this->getSillaDeRueda() && !$this->getAsistencia() && $this->getComidasEspeciales())){
-            $incremento=15;
+            $incremento=$porc+15;
         }
         return $incremento;
     }

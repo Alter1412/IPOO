@@ -208,23 +208,23 @@ function cargarPasajeroEspecial(){
             $numAsiento=trim(fgets(STDIN));
             echo "Ingrese el N° de Ticket:\n";
             $numTicket=trim(fgets(STDIN));
-            echo "Necesita silla de ruedas?:\n";
+            echo "Necesita silla de ruedas?:si/no\n";
             $respuesta1=trim(fgets(STDIN));
-            if($respuesta1=="si" || $respuesta1=="si" || $respuesta1=="SI"){
+            if($respuesta1=="si" || $respuesta1=="Si" || $respuesta1=="SI" || $respuesta1="s"){
                 $silla_de_rueda=true;
             }else{
                 $silla_de_rueda=false;
             }
-            echo "Necesita asistencia en el embarque y desenbarque?\n";
+            echo "Necesita asistencia en el embarque y desenbarque?: si/no\n";
             $respuesta2=trim(fgets(STDIN));
-            if($respuesta2=="si" || $respuesta2=="si" || $respuesta2=="SI"){
+            if($respuesta2=="si" || $respuesta2=="Si" || $respuesta2=="SI" || $respuesta2="s"){
                 $asistencia=true;
             }else{
                 $asistencia=false;
             }
-            echo "Necesita Comida Especial?\n";
+            echo "Necesita Comida Especial?: si/no\n";
             $respuesta3=trim(fgets(STDIN));
-            if($respuesta3=="si" || $respuesta3=="si" || $respuesta3=="SI"){
+            if($respuesta3=="si" || $respuesta3=="Si" || $respuesta3=="SI" || $respuesta3="s"){
                 $comidas_especiales=true;
             }else{
                 $comidas_especiales=false;
