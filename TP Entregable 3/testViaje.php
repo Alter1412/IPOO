@@ -23,15 +23,16 @@ function menuPrincipal(){
  * funcion que muestra un menu de opcion 2
  */
 function menuOpcion2(){
-    echo "+------------------------------------+\n";
-    echo "+ Que dato desea modificar?:         +\n";
-    echo "+------------------------------------+\n";
-    echo "+ 1- Codigo del viaje                +\n";
-    echo "+ 2- Destino                         +\n";
-    echo "+ 3- Datos del los pasajeros         +\n";
-    echo "+ 4- Datos del Responsable del viaje +\n";
-    echo "+ 5- Volver atras                    +\n";
-    echo "+------------------------------------+\n";
+    echo "+--------------------------------------+\n";
+    echo "+ Que dato desea modificar?:           +\n";
+    echo "+--------------------------------------+\n";
+    echo "+ 1- Codigo del viaje                  +\n";
+    echo "+ 2- Destino                           +\n";
+    echo "+ 3- Corregir la Cantidad de Pasajeros +\n";
+    echo "+ 4- Datos del los pasajeros           +\n";
+    echo "+ 5- Datos del Responsable del viaje   +\n";
+    echo "+ 6- Volver atras                      +\n";
+    echo "+--------------------------------------+\n";
 
 }
 /**
@@ -548,16 +549,22 @@ function codigoOpcion2($elViaje){
                 $elViaje->setDestino_viaje($nuevoDestino);
                 break;
             case 3:
+                echo "Ingrese la cantidad de pasajeros correcta: \n";
+                $correccion=trim(fgets(STDIN));
+                $elViaje->setCantidadPasajerosMaxima($correccion);
+                break;
+            case 4:
                 codigoModificacionPasajero($elViaje);
                 break;
-            case 4://modificar responsable
+            case 5://modificar responsable
                 $elViaje->setResponsableViaje(modificarResponsableViaje($elViaje));
+                break;
 
                 
 
         }
         
-    }while($o!=5 );
+    }while($o!=6 );
 }
 
 
