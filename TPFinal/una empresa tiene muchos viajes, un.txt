@@ -1,0 +1,7 @@
+una empresa tiene muchos viajes, un viaje tiene una empresa
+
+un viaje tiene un responsable, un responsable tiene muchos viajes
+
+control de Id. Examinar si existe o no en la BD
+
+Borrar viaje primero, luego la empresa

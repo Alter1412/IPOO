@@ -34,7 +34,7 @@ class PasajeroEspecial extends Pasajero{
         $this->comidas_especiales=$comidas_especiales;
     }
 
-    private function toStringAux($necesidad){
+    private function toStringAux($necesidad){//no uso una ternaria porque me da error
         if($necesidad){
             $texto="si";
         }else{

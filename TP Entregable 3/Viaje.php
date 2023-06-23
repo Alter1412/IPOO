@@ -222,7 +222,7 @@ class Viaje{
         return $importeAPagar;
     }
 
-    public function venderPasaje($objPasajero){
+    public function venderPasaje($objPasajero){//Corregir esto. estamos en herencia y no es necesario la diferenciacion de clases
         /*$agregado=*/$this->agregarPasajero($objPasajero);
         $suma=-1;
         $estandar= new ReflectionClass('PasajeroEstandar');

@@ -1,0 +1,23 @@
+En Herencia cambiar:
+
+en persona cambiar por:
+		   publiic function cargar($datos){
+			$this->setNrodoc($datos['nrodoc']);
+			$this->setNombre($datos['nombre']);
+			$this->setApellido($datos['apellido']);
+			$this->setEmail($datos['mail']);
+		    }
+
+en estudiante cambiar por:
+			 publiic function cargar($datos){
+				parten::cargar($datos);
+				$this->setCarrera($datos['carrera']);
+				}
+
+en testEstudiante crear un array $array=[];
+				$array['nrodoc']=$nrdoc;
+				$array['nombre']=$nombre;
+				$array['apellido']=$apellido;
+				$array['mail']=$mail;//yo@mail.com.ar
+				$array['carrera']=$carrear//IPOO
+luego cargar en $objetoEstudiante->cargar($array);
