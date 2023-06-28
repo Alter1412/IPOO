@@ -596,12 +596,39 @@ function menuResponsable(){
                             $eliminar=trim(fgets(STDIN));
                             $exist=$unviaje->Buscar($eliminar);
                             if($exist){
-                                $respuesta=$unviaje->eliminar();
-                                if($respuesta){
-                                    echo "\nViaje Eliminado\n";
+                                $colpasajeros=$unviaje->getColPasajeros();
+                                if($colpasajeros!=null){
+                                    echo "\nEl Viaje contiene Pasajeros.\n
+                                        Desea continuar? Se borrara el viaje y los pasajeros que contiene(s/n)\n";
+                                        $a=trim(fgets(STDIN));
+                                        if($a=="s"){
+                                            $listPasajeros=$unviaje->getColPasajeros();
+                                                for($j=0;$j<count($listPasajeros);$j++){
+                                                    $unpasajero=$listPasajeros[$j];
+                                                    $r=$unpasajero->eliminar();
+                                                    if($r){
+                                                        echo "\nPasajero Eliminado\n";
+                                                    }else{
+                                                         echo "\nOcurrio un error\n";
+                                                    }
+                                                }
+                                                $respuesta=$unviaje->eliminar();
+                                                if($respuesta){
+                                                    echo "\nViaje eliminado\n";
+                                                }else{
+                                                    echo "\nOcurrio un Error\n";
+                                                }
+                                                
+                                        }
                                 }else{
-                                    echo $unviaje->getmensajeoperacion();
+                                    $respuesta=$unviaje->eliminar();
+                                    if($respuesta){
+                                        echo "\nViaje Eliminado\n";
+                                    }else{
+                                        echo "\nOcurrio un Error\n";
+                                    }
                                 }
+                                
                             }else{
                                 echo "\nEl viaje ingresado no Existe\n";
                             }
@@ -621,7 +648,44 @@ function menuResponsable(){
                                 if($resp){
                                     echo "Empresa Eliminada\n";
                                 }else{
-                                    echo $unaempresa->getmensajeoperacion();
+                                    echo "La empresa contiene viajes.
+                                    \n Si la elimina borrara los viajes y pasajeros relacionados a esta empresa.
+                                    \nDesea continuar? (s/n):\n";
+                                    $resEliminar=trim(fgets(STDIN));
+                                    if($resEliminar =="s"){
+                                        $viaje=new Viaje();
+                                        $lViajes=$viaje->listar("idempresa=".$unaempresa->getIdEmpresa());
+                                        for($i=0; $i< count($lViajes);$i++){
+                                            $viaje->Buscar($lViajes[$i]->getIdViaje());
+                                            //$resp=$viaje->eliminar();
+                                            //if(!$resp){
+                                                $listPasajeros=$viaje->getColPasajeros();
+                                                for($j=0;$j<count($listPasajeros);$j++){
+                                                    $unpasajero=$listPasajeros[$j];
+                                                    $r=$unpasajero->eliminar();
+                                                    if($r){
+                                                        echo "\nPasajero Eliminado\n";
+                                                    }else{
+                                                        echo "\nOcurrio un Error\n";
+                                                    }
+                                                }
+                                                $resp=$viaje->eliminar();
+                                                if($resp){
+                                                    echo "\nViaje Eliminado\n";
+                                                }else{
+                                                    echo "\nOcurrio un Error\n";
+                                                }
+                                            //}else{
+                                                $resp=$unaempresa->eliminar();
+                                                if($resp){
+                                                    echo "\nEmpresa eliminada\n";
+                                                }else{
+                                                    echo "\nOcurrio un Error\n";
+                                                }
+                                            //}
+                                        }
+                                        
+                                    }
                                 }
                             }else{
                                 echo "\nLa Empresa no Existe\n";
