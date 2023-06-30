@@ -103,7 +103,7 @@ class Pasajero{
 		    $consultaPasajeros=$consultaPasajeros.' where '.$condicion;
 		}
 		$consultaPasajeros.=" order by papellido ";
-		echo $consultaPasajeros;
+		
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaPasajeros)){
 				$arregloPasajeros= array();

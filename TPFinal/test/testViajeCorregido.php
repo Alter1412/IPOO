@@ -707,7 +707,7 @@ function menuResponsable(){
                                     echo "Responsable Eliminado\n";
                                     echo "\n---------------\n";
                                 }else{
-                                    echo $unresponsable->getmensajeoperacion();
+                                    echo "No se pudo Eliminar al Resoponsable";
                                 }
                             }else{
                                 echo "\nEl Responsable no Existe\n";

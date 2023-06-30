@@ -129,7 +129,7 @@ class Viaje{
 		    $consultaViajes=$consultaViajes.' where '.$condicion;
 		}
 		$consultaViajes.=" order by vdestino ";
-		echo $consultaViajes;
+		 
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaViajes)){
 				$arregloViajes= array();

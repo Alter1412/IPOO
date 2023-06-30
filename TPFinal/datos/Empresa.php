@@ -87,7 +87,7 @@ class Empresa{
 		    $consultaEmpresa=$consultaEmpresa.' where '.$condicion;
 		}
 		$consultaEmpresa.=" order by enombre ";
-		echo $consultaEmpresa;
+	
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaEmpresa)){
 				$arregloEmpresa= array();

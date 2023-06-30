@@ -94,7 +94,7 @@ class ResponsableV{
 		    $consultaResponsable=$consultaResponsable.' where '.$condicion;
 		}
 		$consultaResponsable.=" order by rapellido ";
-		echo $consultaResponsable;
+		
 		if($base->Iniciar()){
 			if($base->Ejecutar($consultaResponsable)){
 				$arregloResponsable= array();
